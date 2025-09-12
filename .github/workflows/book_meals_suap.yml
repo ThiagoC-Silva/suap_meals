@@ -2,7 +2,7 @@ name: Agendar refeições no SUAP
 
 on:
   schedule:
-    - cron: '30 * * * 0,3' 
+    - cron: '30 0 * * 0,3' 
   workflow_dispatch:
 
 jobs:
@@ -23,8 +23,6 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run script
-        # Condição para rodar o script somente no horário de 21h30
-        if: format('{0:H}', utcNow()) == secrets.CRON_SCHEDULING
         env:
           SUAP_USERNAME: ${{ secrets.SUAP_USERNAME }}
           SUAP_PASSWORD: ${{ secrets.SUAP_PASSWORD }}
